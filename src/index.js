@@ -19,9 +19,23 @@ async function main() {
 
   // List indices
   const { items } = await algoliaClient.listIndexes();
-  for (const index of items) {
-    logger.log(index.name);
+  for (const item of items) {
+    const index = algoliaClient.initIndex(item.name);
+    const records = await getIndexRecords(index);
+
+    logger.log(index.indexName, records.length, 'records');
   }
+}
+
+function getIndexRecords(index) {
+  return new Promise((resolve, reject) => {
+    const browser = index.browseAll();
+    let records = [];
+
+    browser.on('result', content => (records = records.concat(content.hits)));
+    browser.on('end', () => resolve(records));
+    browser.on('error', e => reject(e));
+  });
 }
 
 main().catch(e => logger.error(e.message));
