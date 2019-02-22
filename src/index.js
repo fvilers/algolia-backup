@@ -4,6 +4,7 @@ import algoliasearch from 'algoliasearch';
 import { promisify } from 'util';
 
 import { isProd } from './helpers';
+import { JsonDataFormatter } from './plugins/JsonDataFormatter';
 import { FileWriterPlugin } from './plugins/FileWriterPlugin';
 
 if (!isProd()) {
@@ -41,7 +42,7 @@ function getIndexRecords(index, callback) {
   browser.on('error', e => callback(e));
 }
 
-const outputPlugin = new FileWriterPlugin({
+const outputPlugin = new FileWriterPlugin(new JsonDataFormatter(), {
   outputPath: process.env.OUTPUT_PATH
 });
 

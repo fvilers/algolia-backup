@@ -11,7 +11,9 @@ export const defaults = {
 };
 
 export class FileWriterPlugin {
-  constructor(options) {
+  constructor(dataFormatter, options) {
+    if (!dataFormatter) throw new Error('Missing data formatter');
+    this.dataFormatter = dataFormatter;
     this.options = { ...defaults, ...options };
   }
 
@@ -22,7 +24,7 @@ export class FileWriterPlugin {
     await mkdirAsync(this.options.outputPath, { recursive: true });
     await writeFileAsync(
       filePath,
-      JSON.stringify(records, null, 2),
+      this.dataFormatter.formatData(records),
       this.options.encoding
     );
   }
