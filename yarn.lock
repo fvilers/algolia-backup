@@ -624,6 +624,14 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@fvilers/simple-logger@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@fvilers/simple-logger/-/simple-logger-1.1.1.tgz#23ead81c9f1fc87cf1939e87941f11a32d046723"
+  integrity sha512-7LeSYZ8rhA7x7pO//5BauGQr2RBHH4qZm9T9ALQsUTvTAPT0XGvfGzj3CMjCidvmg1/JHpmzQfn20wcllAQVgw==
+  dependencies:
+    chalk "^2.4.2"
+    lodash "^4.17.11"
+
 ansi-styles@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.2.1.tgz#41fbb20243e50b12be0f04b8dedbf07520ce841d"
@@ -650,7 +658,7 @@ caniuse-lite@^1.0.30000929:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000938.tgz#b64bf1427438df40183fce910fe24e34feda7a3f"
   integrity sha512-ekW8NQ3/FvokviDxhdKLZZAx7PptXNwxKgXtnR5y+PR3hckwuP3yJ1Ir+4/c97dsHNqtAyfKUGdw8P4EYzBNgw==
 
-chalk@^2.0.0:
+chalk@^2.0.0, chalk@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.2.tgz#cd42541677a54333cf541a49108c1432b44c9424"
   integrity sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==

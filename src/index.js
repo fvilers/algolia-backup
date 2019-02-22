@@ -1,8 +1,11 @@
 import dotenv from 'dotenv';
+import { Logger } from '@fvilers/simple-logger';
 import { isProd } from './helpers';
+
+const logger = new Logger();
 
 if (!isProd()) {
   dotenv.load();
 }
 
-console.log(process.env.ALGOLIA_APP_ID);
+logger.log(process.env.ALGOLIA_APP_ID);
