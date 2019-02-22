@@ -1,0 +1,20 @@
+{
+  "name": "algolia-backup",
+  "version": "0.0.0",
+  "description": "A tool that helps to backup Algolia indices",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fvilers/algolia-backup.git"
+  },
+  "keywords": [
+    "algolia",
+    "backup",
+    "tool"
+  ],
+  "author": "Fabian Vilers <fabian.vilers@dev-one.com> (https://www.dev-one.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fvilers/algolia-backup/issues"
+  },
+  "homepage": "https://github.com/fvilers/algolia-backup#readme"
+}
