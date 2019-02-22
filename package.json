@@ -2,6 +2,9 @@
   "name": "algolia-backup",
   "version": "0.0.0",
   "description": "A tool that helps to backup Algolia indices",
+  "scripts": {
+    "start": "npx babel-node ./src"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fvilers/algolia-backup.git"
@@ -16,5 +19,10 @@
   "bugs": {
     "url": "https://github.com/fvilers/algolia-backup/issues"
   },
-  "homepage": "https://github.com/fvilers/algolia-backup#readme"
+  "homepage": "https://github.com/fvilers/algolia-backup#readme",
+  "devDependencies": {
+    "@babel/core": "7.3.3",
+    "@babel/node": "7.2.2",
+    "@babel/preset-env": "7.3.1"
+  }
 }
