@@ -29,8 +29,8 @@ async function main() {
 
   // List indices
   const { items } = await algoliaClient.listIndexes();
-  for (const item of items) {
-    const index = algoliaClient.initIndex(item.name);
+  for (const { name } of items) {
+    const index = algoliaClient.initIndex(name);
     const fileName = `${index.indexName}.json`;
     const filePath = path.join(process.env.OUTPUT_PATH, fileName);
     const records = await getIndexRecordsAsync(index);
