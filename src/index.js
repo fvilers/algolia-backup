@@ -1,11 +1,15 @@
 import dotenv from 'dotenv';
 import { Logger } from '@fvilers/simple-logger';
+import algoliasearch from 'algoliasearch';
 import { isProd } from './helpers';
-
-const logger = new Logger();
 
 if (!isProd()) {
   dotenv.load();
 }
 
-logger.log(process.env.ALGOLIA_APP_ID);
+const logger = new Logger();
+const algoliaClient = algoliasearch(
+  process.env.ALGOLIA_APP_ID,
+  process.env.ALGOLIA_ADMIN_KEY
+);
+logger.log('Aloglia client initialized.');
