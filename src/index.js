@@ -1,22 +1,19 @@
 import dotenv from 'dotenv';
 import { Logger } from '@fvilers/simple-logger';
 import algoliasearch from 'algoliasearch';
-import path from 'path';
-import { mkdir, writeFile } from 'fs';
 import { promisify } from 'util';
 
 import { isProd } from './helpers';
+import { FileWriterPlugin } from './plugins/FileWriterPlugin';
 
 if (!isProd()) {
   dotenv.load();
 }
 
 const logger = new Logger();
-const writeFileAsync = promisify(writeFile);
-const mkdirAsync = promisify(mkdir);
 const getIndexRecordsAsync = promisify(getIndexRecords);
 
-async function main() {
+async function main(outputPlugin) {
   // Initialization
   const algoliaClient = algoliasearch(
     process.env.ALGOLIA_APP_ID,
@@ -24,20 +21,14 @@ async function main() {
   );
   logger.log('Aloglia client initialized.');
 
-  // Ensure output path exists
-  await mkdirAsync(process.env.OUTPUT_PATH, { recursive: true });
-
   // List indices
   const { items } = await algoliaClient.listIndexes();
   for (const { name } of items) {
     const index = algoliaClient.initIndex(name);
-    const fileName = `${index.indexName}.json`;
-    const filePath = path.join(process.env.OUTPUT_PATH, fileName);
     const records = await getIndexRecordsAsync(index);
 
     // Write index content as JSON to file
-    await writeFileAsync(filePath, JSON.stringify(records, null, 2), 'utf-8');
-    logger.log('Wrote index content to', fileName);
+    await outputPlugin.writeIndex(index.indexName, records);
   }
 }
 
@@ -50,4 +41,8 @@ function getIndexRecords(index, callback) {
   browser.on('error', e => callback(e));
 }
 
-main().catch(e => logger.error(e.message));
+const outputPlugin = new FileWriterPlugin({
+  outputPath: process.env.OUTPUT_PATH
+});
+
+main(outputPlugin).catch(e => logger.error(e.message));
